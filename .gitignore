@@ -1,0 +1,10 @@
+build/
+*.obj
+*.pdb
+*.ilk
+*.exe
+
+save.txt
+*/save.txt
+
+!bin/

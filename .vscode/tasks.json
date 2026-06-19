@@ -6,8 +6,8 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "Get-Process -Name Game -ErrorAction SilentlyContinue | Stop-Process -Force;",
-                "cl.exe /Zi /EHsc /nologo /Fe:${workspaceFolder}\\build\\Game.exe /Fo:${workspaceFolder}\\build\\ /Fd:${workspaceFolder}\\build\\ ${workspaceFolder}\\src\\Main.cpp ${workspaceFolder}\\src\\Attributes\\Type.cpp ${workspaceFolder}\\src\\Attributes\\Form.cpp ${workspaceFolder}\\src\\Attributes\\Attribute.cpp ${workspaceFolder}\\src\\Spells\\basicSpell.cpp"
+                "Get-Process -Name Game -ErrorAction SilentlyContinue | Stop-Process -Force; Get-Process -Name mspdbsrv -ErrorAction SilentlyContinue | Stop-Process -Force;",
+                "cl.exe /Z7 /EHsc /nologo /Fe:${workspaceFolder}\\build\\Game.exe /Fo:${workspaceFolder}\\build\\ /Fd:${workspaceFolder}\\build\\ ${workspaceFolder}\\src\\Main.cpp ${workspaceFolder}\\src\\Attributes\\Type.cpp ${workspaceFolder}\\src\\Attributes\\Form.cpp ${workspaceFolder}\\src\\Spells\\basicSpell.cpp"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

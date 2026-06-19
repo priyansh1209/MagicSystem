@@ -10,12 +10,12 @@ bool gameIsRunning = true;
 std::string name;
 
 void saveGame(std::string name){
-    std::ofstream saveFile("Save/save.txt");
+    std::ofstream saveFile("save.txt");
      if (saveFile.is_open()) {
         saveFile << name << "\n";
 
         saveFile.close();
-        std::cout << "[SUCCESS] Game saved to build/save.txt!\n";
+        std::cout << "[SUCCESS] Game saved to save.txt!\n";
 
     } else {
         std::cout << "[ERROR] Could not create save file.\n";
@@ -23,7 +23,7 @@ void saveGame(std::string name){
 }
 
 void loadGame(std::string& name){
-    std::ifstream saveFile("Save/save.txt");
+    std::ifstream saveFile("save.txt");
 
     if (saveFile.is_open()) {
         std::getline(saveFile,name);
@@ -31,24 +31,58 @@ void loadGame(std::string& name){
         saveFile.close();
         std::cout << "[SUCCESS] Save state loaded perfectly!\n";
     } else {
+        name = "";
         std::cout << "[NOTICE] No save state found. Starting new game\n";
     }
 }
 
+void deleteSave() {
+    std::string path = "save.txt";
+    
+    if (std::remove(path.c_str()) == 0) {
+        std::cout << "[SUCCESS] Save profile deleted permanently.\n";
+    } else {
+        std::cout << "[NOTICE] No save file found to delete.\n";
+    }
+}
+
+void nameDec(){
+    if(name == ""){
+            std::cout << "Welcome to the humble magic town of Ignisgate.\n";
+            std::cout << "What is your name young mage.\n";
+
+            std::getline(std::cin,name);
+        }else if(name != ""){
+            std::cout << "Welcome back to Ignisgate, young " << name << "\n";
+        }
+}
+
 void menue(){
+    std::system("cls");
+    loadGame(name);
     std::cout << "Reincarnated as a mage!\n";
-    std::cout << "/Play to play\n/Tutorial for a tutorial\n/Options for options\n/Load to load\n";
+    std::cout << "/Play to play\n/Tutorial for a tutorial\n/Options for options\n/Delete to delete save file\n/Exit to exit\n";
 
     while(true){
         std::string command;
         std::getline(std::cin,command);
 
         if(command == "/Play"){
-            break;
-        }else if(command == "/Load"){
             loadGame(name);
+            nameDec();
             break;
-        }else{
+        }
+        else if(command == "/Delete"){
+            deleteSave();
+            menue();
+            break;
+        }
+        else if(command == "/Exit"){
+            saveGame(name);
+            std::exit(0);
+            break;
+        }
+        else{
             std::cout << "Incorrect Command, try Again\n";
         }
     }
@@ -65,7 +99,7 @@ void callForOptions(){
             break;
         }
         else if(command == "/Help"){
-            std::cout << "STFU and play the game, its not rocket science dumbass";
+            std::cout << "/Save to save current state\n/Menue to go back to the main menue\n/Exit to close the game (auto saves)";
             break;
         }
         else if(command == "/Menue"){
@@ -73,7 +107,8 @@ void callForOptions(){
             break;
         }
         else if(command == "/Exit"){
-           std::exit(0);
+            saveGame(name);
+            std::exit(0);
             break;
         }
         else{
@@ -82,20 +117,9 @@ void callForOptions(){
     }
 }
 
-void nameDec(){
-    if(name == ""){
-            std::cout << "Welcome to the humble magic town of Ignisgate.\n";
-            std::cout << "What is your name young mage.\n";
-
-            std::getline(std::cin,name);
-        }else if(name != ""){
-            std::cout << "Welcome back to Ignisgate, young " << name << "\n";
-        }
-}
 
 int main(){
     menue();
-    nameDec();
     while(gameIsRunning){
         //BasicSpell spell(Type(TypeEnum::Fire),Form(FormEnum::Rod),{Attribute(AttributeEnum::Big),Attribute(AttributeEnum::Peirce),Attribute(AttributeEnum::Explode)});
         callForOptions();
