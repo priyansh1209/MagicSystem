@@ -1,20 +1,16 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
+            "type": "shell",
             "label": "C/C++: cl.exe build active file",
-            "command": "cl.exe",
+            "command": "powershell",
             "args": [
-                "/Zi",
-                "/EHsc",
-                "/nologo",
-                "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${workspaceFolder}/src/*.cpp",
-                "${workspaceFolder}/src/Attributes/*.cpp",
-                "${workspaceFolder}/src/Spells/*.cpp",
+                "-Command",
+                "Get-Process -Name Game -ErrorAction SilentlyContinue | Stop-Process -Force;",
+                "cl.exe /Zi /EHsc /nologo /Fe:${workspaceFolder}\\build\\Game.exe /Fo:${workspaceFolder}\\build\\ /Fd:${workspaceFolder}\\build\\ ${workspaceFolder}\\src\\Main.cpp ${workspaceFolder}\\src\\Attributes\\Type.cpp ${workspaceFolder}\\src\\Spells\\basicSpell.cpp"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$msCompile"
