@@ -8,3 +8,4 @@ save.txt
 */save.txt
 
 !bin/
+!bin/*
