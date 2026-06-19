@@ -3,7 +3,6 @@
     "configurations": [
         {
             "name": "C++ Launch Game",
-            // FIX 1: Change type to cppvsdbg (Native Windows VS Debugger)
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Game.exe",
@@ -12,7 +11,6 @@
             "cwd": "${workspaceFolder}/build",
             "environment": [],
             "externalConsole": false,
-            // REMOVED: MIMode and miDebuggerPath lines are deleted
             "preLaunchTask": "C/C++: cl.exe build active file"
         }
     ]

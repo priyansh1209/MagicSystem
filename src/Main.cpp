@@ -1,14 +1,16 @@
 #include <iostream>
-#include "Enums/TypeEnum.h"
 #include "Attributes/Type.h"
+#include "Attributes/Form.h"
+#include "Attributes/Attribute.h"
 #include "Spells/Spell.h"  
 #include "Spells/BasicSpell.h"
 
 int main(){
-    Type Fire(TypeEnum::Fire);
-    Type Water(TypeEnum::Water);
-    Type Air(TypeEnum::Air);
-    Type Earth(TypeEnum::Earth);
-    BasicSpell spell(Fire);
-    spell.printTypes();
+    bool gameIsRunning = true;
+    while(gameIsRunning){
+        // BasicSpell spell(Type(TypeEnum::Fire),Form(FormEnum::Rod),{Attribute(AttributeEnum::Big),Attribute(AttributeEnum::Peirce),Attribute(AttributeEnum::Explode)});
+        //cast(Rods From God)
+    }
+    
 }
+
